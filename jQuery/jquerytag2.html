@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Full Demo</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #c0f29f;
+      text-align: center;
+      margin: 20px;
+    }
+    h2, h3 {
+      color: rgb(41, 5, 142);
+    }
+    .temp {
+      border: 2px solid black;
+      margin: 10px auto;
+      padding: 15px;
+      width: 50%;
+      background-color: rgb(197, 195, 195);
+      border-radius: 10px;
+    }
+    #list {
+      margin-top: 15px;
+      list-style: square;
+      text-align: left;
+      width: 250px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      background-color: rgb(255, 249, 249);
+    }
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #f3e6e6;
+      color: rgb(87, 27, 207);
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #77786f;
+    }
+    input {
+      margin: 8px;
+      padding: 6px;
+      border-radius: 5px;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+  <h2>Hello jQuery</h2>
+  <h3>just for timepass</h3>
+  <button id="btn">Click Me</button>
+  
+  <div class="temp">
+    <p>This is a different division on which we are using the class tags using jQuery</p>
+  </div>
+
+  <!-- Live typing -->
+  <input type="text" id="myInput" placeholder="Type here...">
+  <p id="output">Hi this text</p>
+
+  <!-- Task input -->
+  <input type="text" id="taskInput" placeholder="Enter a task">
+  <button id="addTask">Add Task</button>
+
+  <ul id="list">
+    <li>Item 1</li>
+  </ul>
+
+  <!-- Control buttons -->
+  <button id="add">Add Item</button>
+  <button id="addf">Add Item First</button>
+  <button id="remove">Remove First</button>
+  <button id="addCss">Add CSS</button>
+  <button id="removeCss">Remove CSS</button>
+  <button id="toggleCss">Toggle CSS</button>
+
+  <script>
+    $(document).ready(function(){
+
+      // Button click
+      $("#btn").click(function(){
+        $("h2").text("Button Clicked!");
+        $("h3").text("Button Clicked! Duplicate");
+        $(".temp").css("background-color", "yellow");
+        $("p").css("font-weight", "bold");
+      });
+
+      // Double click
+      $("#btn").dblclick(function(){
+        $("h2").text("Button Clicked Twice!");
+        $("h3").text("Button Clicked! Twice Duplicate");
+        $(".temp").css("background-color", "orange");
+        $("p").css("font-style", "italic");
+      });
+
+      // Hover
+      $("#btn").hover(function(){
+        $("h2").text("Button Hovered!");
+        $("h3").text("Button Hovered! Duplicate");
+        $(".temp").css("background-color", "cyan");
+      });
+
+      // Add list item
+      $("#add").click(function(){
+        $("#list").append("<li>New Item appended from script</li>");
+      });
+
+      // Prepend list item
+      $("#addf").click(function(){
+        $("#list").prepend("<li>New Item prepended from script</li>");
+      });
+
+      // Remove first item
+      $("#remove").click(function(){
+        $("#list li:first").remove();
+      });
+
+      // Live input typing
+      $("#myInput").on("input", function(){
+        let val = $(this).val();
+        $("#output").text(val);
+      });
+
+      // Add task from input
+      $("#addTask").click(function(){
+        let task = $("#taskInput").val().trim();
+        if(task){
+          $("#list").append("<li>" + task + "</li>");
+          $("#taskInput").val(''); // clear input
+        }
+      });
+
+      // Add CSS
+      $("#addCss").click(function(){
+        $(".temp").css({
+          "border": "3px solid red",
+          "padding": "20px",
+          "color": "blue",
+          "box-shadow": "0px 4px 10px gray"
+        });
+      });
+
+      // Remove CSS
+      $("#removeCss").click(function(){
+        $(".temp").removeAttr("style");
+        $("p").removeAttr("style");
+      });
+
+      // Toggle CSS
+      let cssAdded = false;
+      $("#toggleCss").click(function(){
+        if(!cssAdded){
+          $(".temp").css({
+            "border": "3px solid green",
+            "padding": "20px",
+            "color": "darkred",
+            "background-color": "lightyellow",
+            "box-shadow": "0px 4px 10px black"
+          });
+          cssAdded = true;
+          $(this).text("Undo Toggle CSS");
+        } else {
+          $(".temp").removeAttr("style");
+          $("p").removeAttr("style");
+          cssAdded = false;
+          $(this).text("Toggle CSS");
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
