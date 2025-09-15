@@ -38,13 +38,11 @@
 
     <script>
         $(document).ready(function() {
-            // Apply CSS on click
             $('#todo-list').on('click', 'li', function() {
-                $('#todo-list li').removeClass('selected'); // Remove from others
-                $(this).addClass('selected'); // Add to clicked item
+                $('#todo-list li').removeClass('selected');
+                $(this).addClass('selected');
             });
 
-            // Enable editing on double-click
             $('#todo-list').on('dblclick', 'li', function() {
                 var $li = $(this);
                 var currentText = $li.text();
@@ -53,20 +51,18 @@
                 $li.html($input);
                 $input.focus();
 
-                // Save on Enter key press
                 $input.on('keydown', function(e) {
                     if (e.key === "Enter") {
                         var newText = $(this).val();
                         $li.text(newText);
-                        $li.removeClass('selected'); // Optionally remove style after editing
+                        $li.removeClass('selected');
                     }
                 });
 
-                // Save on clicking outside (blur)
                 $input.on('blur', function() {
                     var newText = $(this).val();
                     $li.text(newText);
-                    $li.removeClass('selected'); // Optionally remove style after editing
+                    $li.removeClass('selected');
                 });
             });
         });
